@@ -12,6 +12,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by tsuruda_tomohiro on 2016/05/01.
@@ -27,10 +28,8 @@ public class PointView extends View {
     }
 
     public boolean onTouchEvent(MotionEvent e){
-        Date dt = new Date();
         switch (e.getAction()){
             case MotionEvent.ACTION_DOWN:
-                start_time = dt.getTime()/10;
                 break;
             case MotionEvent.ACTION_MOVE:
 
@@ -39,8 +38,9 @@ public class PointView extends View {
                 Ball b = new Ball();
                 b.x = e.getX();
                 b.y = e.getY();
-                //押してから手を離した時間でボールの大きさを決める
-                b.size = dt.getTime()/10 - start_time;
+                Random r = new Random();
+                //乱数でボールの大きさを決める
+                b.size = r.nextInt(170)+1;
                 bl.add(b);
                 break;
         }
@@ -77,6 +77,6 @@ public class PointView extends View {
     public class Ball{
         float x;
         float y;
-        long size;
+        int size;
     }
 }
